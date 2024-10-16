@@ -1,0 +1,207 @@
+---
+sidebar: sidebar 
+permalink: solutions/ontap-day01-prepare.html 
+keywords: bluexp automation catalog, netapp automation solutions, ontap day 0/1, prepare 
+summary: Vor der Implementierung der Automatisierungslösung müssen Sie die ONTAP-Umgebung vorbereiten und Ansible installieren und konfigurieren. 
+---
+= Bereiten Sie sich auf die Verwendung der Lösung für den ONTAP Tag 0/1 vor
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Vor der Implementierung der Automatisierungslösung müssen Sie die ONTAP-Umgebung vorbereiten und Ansible installieren und konfigurieren.
+
+
+
+== Erste Überlegungen zur Planung
+
+Lesen Sie sich die folgenden Anforderungen und Überlegungen durch, bevor Sie diese Lösung zum Bereitstellen eines ONTAP-Clusters verwenden.
+
+.Grundvoraussetzungen
+Sie müssen die folgenden grundlegenden Anforderungen erfüllen, um diese Lösung verwenden zu können:
+
+* Sie müssen auf die ONTAP-Software zugreifen können – entweder vor Ort oder über einen ONTAP-Simulator.
+* Sie müssen wissen, wie Sie die ONTAP Software nutzen.
+* Sie müssen wissen, wie Sie die Automatisierungssoftware-Tools von Ansible verwenden können.
+
+
+.Überlegungen zur Planung
+Vor der Implementierung dieser Automatisierungslösung müssen Sie folgende Entscheidungen treffen:
+
+* Der Speicherort, an dem der Ansible-Steuerungsknoten ausgeführt werden soll.
+* Dem ONTAP System, entweder vor Ort Hardware oder einem ONTAP Simulator.
+* Ob Sie eine Anpassung benötigen.
+
+
+
+
+== Bereiten Sie das ONTAP-System vor
+
+Unabhängig davon, ob Sie ein lokales ONTAP System nutzen oder ONTAP simulieren, müssen Sie die Umgebung vorbereiten, bevor die Automatisierungslösung implementiert werden kann.
+
+
+
+=== Optional können Sie Simulate ONTAP installieren und konfigurieren
+
+Wenn Sie diese Lösung über einen ONTAP Simulator bereitstellen möchten, müssen Sie Simulate ONTAP herunterladen und ausführen.
+
+.Bevor Sie beginnen
+* Sie müssen den VMware Hypervisor herunterladen und installieren, den Sie verwenden werden, um Simulate ONTAP auszuführen.
++
+** Wenn Sie über ein Windows- oder Linux-Betriebssystem verfügen, verwenden Sie VMware Workstation.
+** Wenn Sie ein Mac-Betriebssystem verwenden, verwenden Sie VMware Fusion.
++
+
+NOTE: Wenn Sie ein Mac-Betriebssystem verwenden, benötigen Sie einen Intel-Prozessor.
+
+
+
+
+
+.Schritte
+Gehen Sie wie folgt vor, um zwei ONTAP Simulatoren in Ihrer lokalen Umgebung zu installieren:
+
+. Laden Sie Simulate ONTAP aus dem link:https://mysupport.netapp.com/site/tools/tool-eula/simulate-ontap["NetApp Support Website"^].
++
+
+NOTE: Obwohl Sie zwei ONTAP Simulatoren installieren, müssen Sie nur eine Kopie der Software herunterladen.
+
+. Wenn die Anwendung noch nicht ausgeführt wird, starten Sie die VMware-Anwendung.
+. Suchen Sie die heruntergeladene Simulatordatei, und klicken Sie mit der rechten Maustaste, um sie mit der VMware-Anwendung zu öffnen.
+. Legen Sie den Namen der ersten ONTAP-Instanz fest.
+. Warten Sie, bis der Simulator hochgefahren ist, und befolgen Sie die Anweisungen zum Erstellen eines einzelnen Node-Clusters.
++
+Wiederholen Sie die Schritte für die zweite ONTAP-Instanz.
+
+. Fügen Sie optional eine vollständige Datenträgerergänzung hinzu.
++
+Führen Sie in jedem Cluster die folgenden Befehle aus:
+
++
+[source, cli]
+----
+security unlock -username <user_01>
+security login password -username <user_01>
+set -priv advanced
+systemshell local
+disk assign -all -node <Cluster-01>-01
+----
+
+
+
+
+=== Der Status des ONTAP Systems
+
+Sie müssen den Anfangsstatus des ONTAP Systems überprüfen, unabhängig davon, ob es sich vor Ort befindet oder über einen ONTAP Simulator ausgeführt wird.
+
+Stellen Sie sicher, dass die folgenden ONTAP-Systemanforderungen erfüllt sind:
+
+* ONTAP ist installiert und läuft ohne Cluster definiert.
+* ONTAP wird gebootet und zeigt die IP-Adresse für den Zugriff auf das Cluster an.
+* Das Netzwerk ist erreichbar.
+* Sie haben Admin-Anmeldedaten.
+* Das MOTD-Banner (Message of the Day) wird mit der Managementadresse angezeigt.
+
+
+
+
+== Installieren Sie die erforderliche Automatisierungssoftware
+
+Dieser Abschnitt enthält Informationen über die Installation von Ansible und die Vorbereitung der Automatisierungslösung für die Implementierung.
+
+
+
+=== Installation Von Ansible
+
+Ansible kann auf Linux oder Windows Systemen installiert werden.
+
+Die standardmäßige Kommunikationsmethode, die Ansible für die Kommunikation mit einem ONTAP-Cluster verwendet, ist SSH.
+
+Informationen zur Installation von Ansible finden Sie unterlink:https://netapp.io/2018/10/08/getting-started-with-netapp-and-ansible-install-ansible/["Erste Schritte mit NetApp und Ansible – Installation von Ansible"^].
+
+
+NOTE: Ansible muss auf dem Steuerungsknoten des Systems installiert sein.
+
+
+
+=== Laden Sie die Automatisierungslösung herunter und bereiten Sie sie vor
+
+Sie können die Automatisierungslösung mit den folgenden Schritten herunterladen und für die Implementierung vorbereiten.
+
+. Laden Sie die  Automatisierungslösung über die Web-UI von BlueXP  herunterlink:https://console.bluexp.netapp.com/automationCatalog["ONTAP - Tag 0/1  Health Checks"^]. Die Lösung ist als verpackt `ONTAP_DAY0_DAY1.zip`.
+. Extrahieren Sie den ZIP-Ordner und kopieren Sie die Dateien an den gewünschten Speicherort auf dem Steuerknoten in Ihrer Ansible-Umgebung.
+
+
+
+
+== Anfängliche Ansible-Framework-Konfiguration
+
+Führen Sie die Erstkonfiguration des Ansible-Frameworks durch:
+
+. Navigieren Sie zu `playbooks/inventory/group_vars/all`.
+. Entschlüsseln der `vault.yml` Datei:
++
+`ansible-vault decrypt playbooks/inventory/group_vars/all/vault.yml`
+
++
+Wenn Sie zur Eingabe des Vault-Passworts aufgefordert werden, geben Sie das folgende temporäre Passwort ein:
+
++
+`NetApp123!`
+
++
+
+IMPORTANT: „NetApp123!“ ist ein temporäres Kennwort zum Entschlüsseln der `vault.yml` Datei und des entsprechenden Vault-Passworts. Nach der ersten Verwendung müssen Sie die Datei mit Ihrem eigenen Passwort verschlüsseln.
+
+. Ändern Sie die folgenden Ansible-Dateien:
++
+** `clusters.yml` - Ändern Sie die Werte in dieser Datei, um Ihre Umgebung anzupassen.
+** `vault.yml` - Nach der Entschlüsselung der Datei, ändern Sie die ONTAP-Cluster, Benutzername und Passwort-Werte, um Ihre Umgebung anzupassen.
+** `cfg.yml` - Setzen Sie den Dateipfad für `log2file` und `show_request` unter `cfg` auf `True`, um die anzuzeigen `raw_service_request`.
++
+Die `raw_service_request` Variable wird in den Protokolldateien und während der Ausführung angezeigt.
+
++
+
+NOTE: Jede aufgeführte Datei enthält Kommentare mit Anweisungen, wie sie entsprechend Ihren Anforderungen geändert werden kann.
+
+
+
+. Verschlüsseln Sie die Datei erneut `vault.yml`:
++
+`ansible-vault encrypt playbooks/inventory/group_vars/all/vault.yml`
+
++
+
+NOTE: Sie werden bei der Verschlüsselung aufgefordert, ein neues Passwort für den Tresor auszuwählen.
+
+. Navigieren Sie zu `playbooks/inventory/hosts` einem gültigen Python Interpreter und legen Sie ihn fest.
+. Bereitstellung des `framework_test` Service:
++
+Mit dem folgenden Befehl wird das Modul mit dem `gather_subset` Wert `cluster_identity_info` ausgeführt `na_ontap_info`. Dadurch wird überprüft, ob die Grundkonfiguration korrekt ist und ob Sie mit dem Cluster kommunizieren können.
+
++
+[source, cli]
+----
+ansible-playbook -i inventory/hosts site.yml -e cluster_name=<CLUSTER_NAME>
+-e logic_operation=framework-test
+----
++
+Führen Sie den Befehl für jedes Cluster aus.
+
++
+Wenn der Erfolg erfolgreich ist, sollte die Ausgabe wie im folgenden Beispiel angezeigt werden:
+
++
+[listing]
+----
+PLAY RECAP *********************************************************************************
+localhost : ok=12 changed=1 unreachable=0 failed=0 skipped=6
+The key is ‘rescued=0’ and ‘failed=0’..
+----
+

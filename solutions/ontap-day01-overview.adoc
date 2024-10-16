@@ -1,0 +1,109 @@
+---
+sidebar: sidebar 
+permalink: solutions/ontap-day01-overview.html 
+keywords: bluexp automation catalog, netapp automation solutions, ontap day 0/1, overview, introduction 
+summary: Zur Implementierung und Konfiguration eines ONTAP-Clusters mithilfe von Ansible kann die ONTAP-Automatisierungslösung für Tag 0/1 verwendet werden. 
+---
+= Überblick über die ONTAP-Tag-0/1-Lösung
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Zur Implementierung und Konfiguration eines ONTAP-Clusters mithilfe von Ansible kann die ONTAP-Automatisierungslösung für Tag 0/1 verwendet werden. Die Lösung finden Sie im link:https://console.bluexp.netapp.com/automationCatalog["BlueXP Automatisierungskatalog"^].
+
+
+
+== Flexible Implementierungsoptionen für ONTAP
+
+Je nach Ihren Anforderungen können Sie lokale Hardware verwenden oder ONTAP simulieren, um einen ONTAP Cluster mithilfe von Ansible zu implementieren und zu konfigurieren.
+
+.On-Premises-Hardware
+Sie können diese Lösung mit On-Premises-Hardware mit ONTAP wie einem FAS oder einem AFF System implementieren. Sie müssen eine Linux VM verwenden, um den ONTAP-Cluster mit Ansible zu implementieren und zu konfigurieren.
+
+.ONTAP simulieren
+Um diese Lösung mit einem ONTAP-Simulator implementieren zu können, müssen Sie die aktuellste Version von Simulate ONTAP von der NetApp Support-Website herunterladen. Simulieren ONTAP ist ein virtueller Simulator für ONTAP Software. Simulieren Sie ONTAP in einem VMware Hypervisor auf einem Windows-, Linux- oder Mac-System. Für Windows- und Linux-Hosts müssen Sie den VMware Workstation-Hypervisor verwenden, um diese Lösung auszuführen. Wenn Sie über ein Mac-Betriebssystem verfügen, verwenden Sie den VMware Fusion-Hypervisor.
+
+
+
+== Mehrlagiges Design
+
+Das Ansible-Framework vereinfacht die Entwicklung und Wiederverwendung von Automatisierungsausführung und logischen Aufgaben. Das Framework unterscheidet zwischen den Entscheidungsaufgaben (Logikschicht) und den Ausführungsschritten (Ausführungsebene) in der Automatisierung. Wenn Sie verstehen, wie diese Ebenen funktionieren, können Sie die Konfiguration anpassen.
+
+In einem Ansible-„Playbook“ werden verschiedene Aufgaben vom Anfang bis zum Ende ausgeführt. Das `site.yml` Playbook enthält das `logic.yml` Playbook und das `execution.yml` Playbook.
+
+Wenn eine Anfrage ausgeführt wird, ruft das `site.yml` Playbook zuerst in das `logic.yml` Playbook auf und ruft dann das Playbook zur Ausführung der Service-Anfrage auf `execution.yml`.
+
+Sie müssen die logische Schicht des Frameworks nicht verwenden. Die Logikebene bietet Optionen zur Erweiterung der Funktionalität des Frameworks über die hartcodierten Werte für die Ausführung hinaus. Auf diese Weise können Sie die Framework-Funktionen bei Bedarf anpassen.
+
+.Logische Ebene
+Die Logikschicht besteht aus folgenden Komponenten:
+
+* Das Playbook `logic.yml`
+* Logische Aufgabendateien im `logic-tasks` Verzeichnis
+
+
+Die Logikebene bietet die Möglichkeit für komplexe Entscheidungen, ohne dass eine umfassende benutzerdefinierte Integration erforderlich ist (z. B. eine Verbindung zu ServiceNow). Die Logikebene ist konfigurierbar und liefert die Eingabe zu Microservices.
+
+Die Möglichkeit, die Logikschicht zu umgehen, wird ebenfalls bereitgestellt. Wenn Sie die logische Ebene umgehen möchten, definieren Sie die Variable nicht `logic_operation`. Der direkte Aufruf des `logic.yml` Playbooks ermöglicht es, ein gewisses Maß an Debugging ohne Ausführung durchzuführen. Sie können eine „Debug“-Anweisung verwenden, um zu überprüfen, ob der Wert des `raw_service_request` korrekt ist.
+
+Wichtige Überlegungen:
+
+* Das `logic.yml` Playbook sucht nach der `logic_operation` Variablen. Wenn die Variable in der Anfrage definiert ist, wird eine Aufgabendatei aus dem Verzeichnis geladen `logic-tasks`. Die Task-Datei muss eine .yml-Datei sein. Wenn keine passende Task-Datei vorhanden ist und die `logic_operation` Variable definiert ist, schlägt die Logikebene fehl.
+* Der Standardwert der `logic_operation` Variable ist `no-op`. Wenn die Variable nicht explizit definiert ist, wird standardmäßig auf, gesetzt `no-op`, das keine Operationen ausführt.
+* Wenn die `raw_service_request` Variable bereits definiert ist, wird die Ausführung zur Ausführungsebene fortgesetzt. Wenn die Variable nicht definiert ist, schlägt die logische Ebene fehl.
+
+
+.Ausführungsebene
+Die Ausführungsebene besteht aus folgenden Komponenten:
+
+* Das Playbook `execution.yml`
+
+
+Die Ausführungsebene führt die API-Aufrufe zum Konfigurieren eines ONTAP-Clusters durch. Das `execution.yml` Playbook setzt voraus, dass die `raw_service_request` Variable bei der Ausführung definiert ist.
+
+
+
+== Unterstützung für Anpassungen
+
+Sie können diese Lösung auf verschiedene Weise an Ihre Anforderungen anpassen.
+
+Die Anpassungsoptionen umfassen:
+
+* Ändern von Ansible Playbooks
+* Hinzufügen von Rollen
+
+
+.Ansible-Dateien anpassen
+In der folgenden Tabelle werden die in dieser Lösung enthaltenen anpassbaren Ansible-Dateien beschrieben.
+
+[cols="25,75"]
+|===
+| Standort | Beschreibung 
+
+
+ a| 
+`playbooks/inventory/hosts`
+| Enthält eine einzelne Datei mit einer Liste von Hosts und Gruppen. 
+
+
+ a| 
+`playbooks/group_vars/all/*`
+| Ansible bietet eine praktische Möglichkeit, Variablen auf mehrere Hosts gleichzeitig anzuwenden. Sie können alle oder alle Dateien in diesem Ordner ändern, einschließlich `cfg.yml`, , , `clusters.yml` `defaults.yml` , `services.yml` `standards.yml` und `vault.yml`. 
+
+
+ a| 
+`playbooks/logic-tasks`
+| Unterstützung von Entscheidungsaufgaben innerhalb von Ansible und Beibehaltung der Trennung von Logik und Ausführung Sie können diesem Ordner Dateien hinzufügen, die dem entsprechenden Dienst entsprechen. 
+
+
+ a| 
+`playbooks/vars/*`
+| Dynamische Werte, die in Ansible Playbooks und Rollen verwendet werden, um Anpassungen, Flexibilität und Wiederverwendbarkeit von Konfigurationen zu ermöglichen. Bei Bedarf können Sie alle oder alle Dateien in diesem Ordner ändern. 
+|===
+.Anpassen von Rollen
+Sie können die Lösung auch anpassen, indem Sie Ansible-Rollen, auch Microservices genannt, hinzufügen oder ändern. Weitere Informationen finden Sie unter link:ontap-day01-customize.html["Anpassen"].

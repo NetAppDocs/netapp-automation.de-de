@@ -1,0 +1,395 @@
+---
+sidebar: sidebar 
+permalink: solutions/cvo-aws-burst-to-cloud.html 
+keywords: bluexp automation catalog, netapp automation solutions, aws, cloud volumes ontap, burst to cloud 
+summary: Dieser Artikel unterstützt die Lösung NetApp Cloud Volumes ONTAP für die AWS-Automatisierung, die NetApp Kunden aus dem BlueXP -Automatisierungskatalog erhalten. 
+---
+= Cloud Volumes ONTAP für AWS – Burst in die Cloud
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Dieser Artikel unterstützt die Lösung NetApp Cloud Volumes ONTAP für die AWS-Automatisierung, die NetApp Kunden aus dem BlueXP -Automatisierungskatalog erhalten.
+
+Die Automatisierungslösung Cloud Volumes ONTAP für AWS automatisiert die Container-Implementierung von Cloud Volumes ONTAP für AWS mithilfe von Terraform, sodass Sie Cloud Volumes ONTAP für AWS schnell und ohne manuelles Eingreifen implementieren können.
+
+.Bevor Sie beginnen
+* Sie müssen die  Automatisierungslösung über die Web-Oberfläche von BlueXP  herunterladenlink:https://console.bluexp.netapp.com/automationCatalog["Cloud Volumes ONTAP AWS – Burst in die Cloud"^]. Die Lösung ist als verpackt `cvo_aws_flexcache.zip`.
+* Sie müssen eine Linux-VM im gleichen Netzwerk wie Cloud Volumes ONTAP installieren.
+* Nach der Installation der Linux-VM müssen Sie die Schritte in dieser Lösung befolgen, um die erforderlichen Abhängigkeiten zu installieren.
+
+
+
+
+== Schritt: Installieren Sie Docker und Docker Compose
+
+
+
+=== Installation Von Docker
+
+Die folgenden Schritte verwenden Ubuntu 20.04 Debian Linux-Distributionssoftware als Beispiel. Die Befehle, die Sie ausführen, hängen von der Linux-Distributionssoftware ab, die Sie verwenden. Informationen zur Konfiguration finden Sie in der Dokumentation der jeweiligen Linux-Distributionssoftware.
+
+.Schritte
+. Installieren Sie Docker, indem Sie die folgenden Befehle ausführen `sudo`:
++
+[source, cli]
+----
+sudo apt-get update
+sudo apt-get install apt-transport-https cacertificates curl gnupg-agent software-properties-common curl -fsSL https://download.docker.com/linux/ubuntu/gpg |
+sudo apt-key add -
+sudo add-apt-repository “deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable”
+sudo apt-get update
+sudo apt-get install dockerce docker-ce-cli containerd.io
+----
+. Überprüfen Sie die Installation:
++
+[source, cli]
+----
+docker –version
+----
+. Vergewissern Sie sich, dass auf Ihrem Linux-System eine Gruppe namens „Docker“ erstellt wurde. Erstellen Sie bei Bedarf die Gruppe:
++
+[source, cli]
+----
+sudo groupadd docker
+----
+. Fügen Sie den Benutzer hinzu, der der Gruppe Zugriff auf Docker benötigt:
++
+[source, cli]
+----
+sudo usermod -aG docker $(whoami)
+----
+. Ihre Änderungen werden übernommen, nachdem Sie sich beim Terminal abmelden und wieder anmelden. Alternativ können Sie die Änderungen sofort anwenden:
++
+[source, cli]
+----
+newgrp docker
+----
+
+
+
+
+=== Installieren Sie Docker Compose
+
+.Schritte
+. Installieren Sie Docker Compose, indem Sie die folgenden Befehle ausführen `sudo`:
++
+[source, cli]
+----
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+sudo chmod +x /usr/local/bin/docker-compose
+----
+. Überprüfen Sie die Installation:
++
+[source, cli]
+----
+docker-compose –version
+----
+
+
+
+
+== Schritt 2: Vorbereiten des Docker Images
+
+.Schritte
+. Kopieren Sie den `cvo_aws_flexcache.zip` Ordner auf die Linux-VM, die Sie zum Bereitstellen von Cloud Volumes ONTAP verwenden möchten:
++
+[source, cli]
+----
+scp -i ~/<private-key>.pem -r cvo_aws_flexcache.zip <awsuser>@<IP_ADDRESS_OF_VM>:<LOCATION_TO_BE_COPIED>
+----
++
+** `private-key.pem` Ist Ihre private Schlüsseldatei für die Anmeldung ohne Kennwort.
+** `awsuser` Ist der VM-Benutzername.
+** `IP_ADDRESS_OF_VM` Ist die VM IP-Adresse.
+** `LOCATION_TO_BE_COPIED` Ist der Speicherort, an den der Ordner kopiert werden soll.
+
+
+. Extrahieren Sie den `cvo_aws_flexcache.zip` Ordner. Sie können den Ordner im aktuellen Verzeichnis oder an einem benutzerdefinierten Speicherort extrahieren.
++
+Um den Ordner im aktuellen Verzeichnis zu extrahieren, führen Sie Folgendes aus:
+
++
+[source, cli]
+----
+unzip cvo_aws_flexcache.zip
+----
++
+Um den Ordner an einem benutzerdefinierten Speicherort zu extrahieren, führen Sie Folgendes aus:
+
++
+[source, cli]
+----
+unzip cvo_aws_flexcache.zip -d ~/<your_folder_name>
+----
+. Navigieren Sie nach dem Extrahieren des Inhalts zum Ordner, `CVO_Aws_Deployment` und führen Sie den folgenden Befehl aus, um die Dateien anzuzeigen:
++
+[source, cli]
+----
+ ls -la
+----
++
+Sie sollten eine Liste von Dateien sehen, ähnlich wie das folgende Beispiel:
+
++
+[listing]
+----
+total 32
+    drwxr-xr-x   8 user1  staff   256 Mar 23 12:26 .
+    drwxr-xr-x   6 user1  staff   192 Mar 22 08:04 ..
+    -rw-r--r--   1 user1  staff   324 Apr 12 21:37 .env
+    -rw-r--r--   1 user1  staff  1449 Mar 23 13:19 Dockerfile
+    drwxr-xr-x  15 user1  staff   480 Mar 23 13:19 cvo_Aws_source_code
+    drwxr-xr-x   4 user1  staff   128 Apr 27 13:43 cvo_Aws_variables
+    -rw-r--r--   1 user1  staff   996 Mar 24 04:06 docker-compose-deploy.yml
+    -rw-r--r--   1 user1  staff  1041 Mar 24 04:06 docker-compose-destroy.yml
+----
+. Suchen Sie die `cvo_aws_flexcache_ubuntu_image.tar` Datei. Dieses enthält das Docker Image, das für die Implementierung von Cloud Volumes ONTAP für AWS erforderlich ist.
+. Enttaren Sie die Datei:
++
+[source, cli]
+----
+docker load -i cvo_aws_flexcache_ubuntu_image.tar
+----
+. Warten Sie einige Minuten, bis das Docker-Image geladen ist, und überprüfen Sie dann, ob das Docker-Image erfolgreich geladen wurde:
++
+[source, cli]
+----
+docker images
+----
++
+Sie sollten ein Docker-Image mit dem `latest` Tag sehen `cvo_aws_flexcache_ubuntu_image`, wie im folgenden Beispiel gezeigt:
+
++
+[listing]
+----
+REPOSITORY                            TAG        IMAGE ID       CREATED      SIZE
+ cvo_aws_flexcache_ubuntu_image     latest    18db15a4d59c   2 weeks ago   1.14GB
+----
++
+
+NOTE: Bei Bedarf können Sie den Docker-Image-Namen ändern. Wenn Sie den Docker-Image-Namen ändern, müssen Sie den Docker-Image-Namen in den Dateien und `docker-compose-destroy` aktualisieren `docker-compose-deploy`.
+
+
+
+
+
+== Schritt 3: Erstellen Sie variable Umgebungsdateien
+
+In dieser Phase müssen Sie zwei Umgebungsvariablen erstellen. Eine Datei dient zur Authentifizierung der AWS Resource Manager APIs über den AWS-Zugriff und die geheimen Schlüssel. Die zweite Datei dient zum Festlegen von Umgebungsvariablen, die BlueXP  Terraform-Module zum Auffinden und Authentifizieren von AWS-APIs ermöglichen.
+
+.Schritte
+. Erstellen Sie die `awsauth.env` Datei an folgendem Speicherort:
++
+`path/to/env-file/awsauth.env`
+
++
+.. Fügen Sie der Datei folgenden Inhalt hinzu `awsauth.env`:
++
+Access_Key=<> secret_key=<>
+
++
+Das Format *muss* genau wie oben dargestellt sein.
+
+
+
+. Fügen Sie der Datei den absoluten Dateipfad hinzu `.env`.
++
+Geben Sie den absoluten Pfad für die Umgebungsdatei ein `awsauth.env`, die der Umgebungsvariable entspricht `AWS_CREDS`.
+
++
+`AWS_CREDS=path/to/env-file/awsauth.env`
+
+. Navigieren Sie zu dem `cvo_aws_variable` Ordner, und aktualisieren Sie den Zugriffs- und Geheimschlüssel in der Datei mit den Anmeldeinformationen.
++
+Fügen Sie der Datei folgenden Inhalt hinzu:
+
++
+aws_Access_Key_id=<> aws_Secret_Access_Key=<>
+
++
+Das Format *muss* genau wie oben dargestellt sein.
+
+
+
+
+
+== Schritt 4: Cloud Volumes ONTAP-Lizenzen zu BlueXP  hinzufügen oder BlueXP  abonnieren
+
+Sie können Cloud Volumes ONTAP Lizenzen zu BlueXP  hinzufügen oder NetApp BlueXP  im AWS Marketplace abonnieren.
+
+.Schritte
+. Navigieren Sie im AWS-Portal zu *SaaS* und wählen Sie *NetApp BlueXP  abonnieren*.
++
+Sie können entweder dieselbe Ressourcengruppe wie Cloud Volumes ONTAP oder eine andere Ressourcengruppe verwenden.
+
+. Konfigurieren Sie das BlueXP -Portal für den Import des SaaS-Abonnements in BlueXP .
++
+Sie können dies direkt über das AWS-Portal konfigurieren.
+
++
+Sie werden zum BlueXP -Portal umgeleitet, um die Konfiguration zu bestätigen.
+
+. Bestätigen Sie die Konfiguration im BlueXP -Portal mit *Speichern*.
+
+
+
+
+== Schritt 5: Erstellen Sie ein externes Volume
+
+Sie sollten ein externes Volume erstellen, damit die Terraform-Statusdateien und andere wichtige Dateien erhalten bleiben. Sie müssen sicherstellen, dass die Dateien für Terraform verfügbar sind, um den Workflow und die Implementierungen auszuführen.
+
+.Schritte
+. Externes Volume außerhalb von Docker Compose erstellen:
++
+[source, cli]
+----
+docker volume create <volume_name>
+----
++
+Beispiel:
+
++
+[listing]
+----
+docker volume create cvo_aws_volume_dst
+----
+. Verwenden Sie eine der folgenden Optionen:
++
+.. Fügen Sie einen externen Volume-Pfad zur Umgebungsdatei hinzu `.env`.
++
+Sie müssen das genaue unten dargestellte Format einhalten.
+
++
+Format:
+
++
+`PERSISTENT_VOL=path/to/external/volume:/cvo_aws`
+
++
+Beispiel:
+`PERSISTENT_VOL=cvo_aws_volume_dst:/cvo_aws`
+
+.. Fügen Sie NFS-Freigaben als externes Volume hinzu.
++
+Stellen Sie sicher, dass der Docker Container mit den NFS-Freigaben kommunizieren kann und dass die korrekten Berechtigungen wie Lese-/Schreibvorgänge konfiguriert sind.
+
++
+... Fügen Sie den Pfad der NFS-Freigaben als Pfad zum externen Volume in der Docker Compose-Datei hinzu, wie unten gezeigt: Format:
++
+`PERSISTENT_VOL=path/to/nfs/volume:/cvo_aws`
+
++
+Beispiel:
+`PERSISTENT_VOL=nfs/mnt/document:/cvo_aws`
+
+
+
+
+
+. Navigieren Sie zum `cvo_aws_variables` Ordner.
++
+Im Ordner sollte die folgende Variablendatei angezeigt werden:
+
++
+** `terraform.tfvars`
+** `variables.tf`
+
+
+. Ändern Sie die Werte innerhalb der `terraform.tfvars` Datei entsprechend Ihren Anforderungen.
++
+Sie müssen die spezifische Begleitdokumentation lesen, wenn Sie einen der Variablenwerte in der Datei ändern `terraform.tfvars`. Die Werte können je nach Region, Verfügbarkeitszonen und anderen von Cloud Volumes ONTAP für AWS unterstützten Faktoren variieren. Dies umfasst Lizenzen, Festplattengröße und VM-Größe für einzelne Nodes sowie Hochverfügbarkeitspaare (HA).
+
++
+Alle unterstützenden Variablen für die Module Connector und Cloud Volumes ONTAP Terraform sind bereits in der Datei definiert `variables.tf`. Sie müssen sich auf die Variablennamen in der Datei beziehen `variables.tf`, bevor Sie sie zur Datei hinzufügen `terraform.tfvars`.
+
+. Je nach Ihren Anforderungen können Sie FlexCache und FlexClone aktivieren oder deaktivieren, indem Sie die folgenden Optionen auf oder `false` einstellen `true`.
++
+Die folgenden Beispiele aktivieren FlexCache und FlexClone:
+
++
+** `is_flexcache_required = true`
+** `is_flexclone_required = true`
+
+
+
+
+
+
+== Schritt 6: Implementierung von Cloud Volumes ONTAP für AWS
+
+Gehen Sie wie folgt vor, um Cloud Volumes ONTAP für AWS zu implementieren.
+
+.Schritte
+. Führen Sie im Stammordner den folgenden Befehl aus, um die Bereitstellung auszulösen:
++
+[source, cli]
+----
+docker-compose -f docker-compose-deploy.yml up -d
+----
++
+Zwei Container werden ausgelöst, der erste Container implementiert Cloud Volumes ONTAP und der zweite Container sendet Telemetriedaten an AutoSupport.
+
++
+Der zweite Container wartet, bis der erste Container alle Schritte erfolgreich abgeschlossen hat.
+
+. Überwachen Sie den Fortschritt des Bereitstellungsprozesses mithilfe der Protokolldateien:
++
+[source, cli]
+----
+docker-compose -f docker-compose-deploy.yml logs -f
+----
++
+Dieser Befehl liefert die Ausgabe in Echtzeit und erfasst die Daten in den folgenden Protokolldateien:
+`deployment.log`
+
++
+`telemetry_asup.log`
+
++
+Sie können den Namen dieser Protokolldateien ändern, indem Sie die Datei mithilfe der folgenden Umgebungsvariablen bearbeiten `.env`:
+
++
+`DEPLOYMENT_LOGS`
+
++
+`TELEMETRY_ASUP_LOGS`
+
++
+Die folgenden Beispiele zeigen, wie Sie die Protokolldateinamen ändern:
+
++
+`DEPLOYMENT_LOGS=<your_deployment_log_filename>.log`
+
++
+`TELEMETRY_ASUP_LOGS=<your_telemetry_asup_log_filename>.log`
+
+
+
+.Nachdem Sie fertig sind
+Mit den folgenden Schritten können Sie die temporäre Umgebung entfernen und Elemente bereinigen, die während des Bereitstellungsprozesses erstellt wurden.
+
+.Schritte
+. Wenn Sie FlexCache bereitgestellt haben, legen Sie die folgende Option in der `terraform.tfvars` Variablendatei fest. Dadurch werden FlexCache-Volumes bereinigt und die zuvor erstellte temporäre Umgebung wird entfernt.
++
+`flexcache_operation = "destroy"`
+
++
+
+NOTE: Die möglichen Optionen sind  `deploy` und `destroy`.
+
+. Wenn Sie FlexClone bereitgestellt haben, legen Sie die folgende Option in der `terraform.tfvars` Variablendatei fest. Dadurch werden FlexClone-Volumes bereinigt und die zuvor erstellte temporäre Umgebung wird entfernt.
++
+`flexclone_operation = "destroy"`
+
++
+
+NOTE: Die möglichen Optionen sind `deploy` und `destroy`.
+
+

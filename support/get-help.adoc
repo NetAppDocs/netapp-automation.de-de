@@ -1,0 +1,35 @@
+---
+sidebar: sidebar 
+permalink: support/get-help.html 
+keywords: help, support, netapp support, technical support, kb, communities 
+summary: 'NetApp unterstützt seine Produkte und Cloud-Services in vielerlei Hinsicht. Umfassende kostenlose Self-Support-Optionen stehen rund um die Uhr zur Verfügung, wie etwa Knowledge Base-Artikel (KB) und ein Community-Forum.' 
+---
+= Holen Sie sich Hilfe
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+NetApp unterstützt seine Produkte und Cloud-Services in vielerlei Hinsicht. Umfassende kostenlose Self-Support-Optionen stehen rund um die Uhr zur Verfügung, wie etwa Knowledge Base-Artikel (KB) und ein Community-Forum.
+
+
+
+== Self-Support-Optionen
+
+* https://kb.netapp.com/["Wissensdatenbank"^]
++
+Durchsuchen Sie die Wissensdatenbank, um hilfreiche Artikel zur Fehlerbehebung zu finden.
+
+* http://community.netapp.com/["Communitys"^]
++
+Werden Sie Mitglied in einer NetApp Community, um laufende Diskussionen zu verfolgen oder neue zu erstellen.
+
+* https://mysupport.netapp.com/["NetApp Support"^]
++
+Sie erhalten Zugriff auf Tools für die Fehlerbehebung, Dokumentation und technische Support-Unterstützung.
+
+

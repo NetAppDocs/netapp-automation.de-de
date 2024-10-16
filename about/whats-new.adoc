@@ -1,0 +1,53 @@
+---
+sidebar: sidebar 
+permalink: about/whats-new.html 
+keywords: whats new, enhancements, new features 
+summary: NetApp aktualisiert regelmäßig die Automatisierungslösungen, REST-APIs und zugehörige Software, um Ihnen neue Funktionen, Verbesserungen und Bug Fixes zur Verfügung zu stellen. 
+---
+= Neuerungen bei NetApp-Automatisierung
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+NetApp aktualisiert regelmäßig die Automatisierungslösungen, REST-APIs und zugehörige Software, um Ihnen neue Funktionen, Verbesserungen und Bug Fixes zur Verfügung zu stellen.
+
+
+
+== 27 Juli 2023
+
+.Cloud Volumes ONTAP
+Die Unterstützung von Cloud Volumes ONTAP wird durch die Public Cloud-Umgebung organisiert. Für folgende Cloud-Umgebung wird eine neue Lösung bereitgestellt:
+
+* link:../solutions/cvo-gcp-burst-to-cloud.html["Cloud Volumes ONTAP für Google Cloud – Burst in die Cloud"]
+
+
+
+
+== 04 Juni 2023
+
+Der NetApp https://console.bluexp.netapp.com/automationCatalog["BlueXP Automatisierungskatalog"^] ist über die BlueXP -Webbenutzeroberfläche verfügbar. Der Automatisierungskatalog bietet Zugang zu Lösungen, die Sie bei der automatisierten Implementierung und Integration von NetApp Produkten unterstützen. Die Dokumentation zu diesen Lösungen ist, wie unten beschrieben, in mehrere verschiedene Produkt- oder Funktionsbereiche unterteilt.
+
+.Amazon FSX für NetApp ONTAP
+Folgende zwei Lösungen stehen für Amazon FSX for NetApp ONTAP zur Verfügung:
+
+* link:../solutions/fsxn-burst-to-cloud.html["Amazon FSX for NetApp ONTAP – Burst-to-Cloud"]
+* link:../solutions/fsxn-disaster-recovery.html["Amazon FSX for NetApp ONTAP – Disaster Recovery"]
+
+
+.Azure NetApp Dateien
+Für die Implementierung von Oracle mit Azure NetApp Files ist eine Lösung enthalten:
+
+* link:../solutions/anf-oracle.html["Oracle mit Azure NetApp Files"]
+
+
+.Cloud Volumes ONTAP
+Die Unterstützung von Cloud Volumes ONTAP wird durch die Public Cloud-Umgebung organisiert. Für zwei Cloud-Umgebungen werden erste Lösungen wie folgt bereitgestellt:
+
+* link:../solutions/cvo-aws-burst-to-cloud.html["Cloud Volumes ONTAP AWS – Burst in die Cloud"]
+* link:../solutions/cvo-azure-burst-to-cloud.html["Cloud Volumes ONTAP Azure – Burst in die Cloud"]
+
