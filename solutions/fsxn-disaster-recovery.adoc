@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
 permalink: solutions/fsxn-disaster-recovery.html 
-keywords: bluexp automation catalog, netapp automation solutions, fsx for ontap, disaster recovery, backup 
+keywords: bluexp automation catalog, netapp automation solutions, fsx for ontap, disaster recovery, backup, netapp console 
 summary: Mit dieser Automatisierungslösung können Sie mithilfe von Amazon FSX für NetApp ONTAP ein Disaster Recovery-Backup eines Quellsystems erstellen. 
 ---
-= Amazon FSX for NetApp ONTAP – Disaster Recovery
+= Amazon FSx for NetApp ONTAP Management – ​​Notfallwiederherstellung
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -14,10 +14,10 @@ summary: Mit dieser Automatisierungslösung können Sie mithilfe von Amazon FSX 
 
 
 [role="lead"]
-Mit dieser Automatisierungslösung können Sie mithilfe von Amazon FSX für NetApp ONTAP ein Disaster Recovery-Backup eines Quellsystems erstellen.
+Mit dieser Automatisierungslösung können Sie mithilfe von Amazon FSx for NetApp ONTAP Verwaltung eine Notfallwiederherstellungssicherung eines Quellsystems erstellen.
 
 
-NOTE: Amazon FSX für NetApp ONTAP wird auch als *FSX für ONTAP* bezeichnet.
+NOTE: Amazon FSx for NetApp ONTAP Management wird auch als *FSx für ONTAP* bezeichnet.
 
 .Über diese Lösung sprechen
 Der mit dieser Lösung bereitgestellte Automatisierungscode führt im allgemeinen die folgenden Aktionen durch:
@@ -36,7 +36,7 @@ Die Automatisierung basiert auf Docker und Docker Compose, die wie unten beschri
 .Bevor Sie beginnen
 Sie müssen über Folgendes verfügen, um die Bereitstellung und Konfiguration abzuschließen:
 
-* Sie müssen die Automatisierungslösung über die Web-Oberfläche von BlueXP  herunterladen https://console.bluexp.netapp.com/automationCatalog["Amazon FSX for NetApp ONTAP – Disaster Recovery"^]. Die Lösung ist als verpackt `FSxN_DR.zip`. Diese ZIP-Datei enthält die `AWS_FSxN_Bck_Prov.zip` Datei, die Sie zur Bereitstellung der in diesem Dokument beschriebenen Lösung verwenden.
+* Sie müssen die https://console.netapp.com/automationCatalog["Amazon FSx for NetApp ONTAP Management – ​​Notfallwiederherstellung"^] Automatisierungslösung über die Web-Benutzeroberfläche der NetApp Console.  Die Lösung ist verpackt als `FSxN_DR.zip` .  Diese Zip-Datei enthält die `AWS_FSxN_Bck_Prov.zip` Datei, die Sie zum Bereitstellen der in diesem Dokument beschriebenen Lösung verwenden.
 * Netzwerk-Konnektivität zwischen Quell- und Zielsystemen
 * Eine Linux-VM mit den folgenden Eigenschaften:
 +

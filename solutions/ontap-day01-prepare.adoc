@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: solutions/ontap-day01-prepare.html 
-keywords: bluexp automation catalog, netapp automation solutions, ontap day 0/1, prepare 
+keywords: bluexp automation catalog, netapp automation solutions, ontap day 0/1, prepare, netapp console 
 summary: Vor der Implementierung der Automatisierungslösung müssen Sie die ONTAP-Umgebung vorbereiten und Ansible installieren und konfigurieren. 
 ---
 = Bereiten Sie sich auf die Verwendung der Lösung für den ONTAP Tag 0/1 vor
@@ -133,7 +133,7 @@ NOTE: Ansible muss auf dem Steuerungsknoten des Systems installiert sein.
 
 Sie können die Automatisierungslösung mit den folgenden Schritten herunterladen und für die Implementierung vorbereiten.
 
-. Laden Sie die  Automatisierungslösung über die Web-UI von BlueXP  herunterlink:https://console.bluexp.netapp.com/automationCatalog["ONTAP - Tag 0/1  Health Checks"^]. Die Lösung ist als verpackt `ONTAP_DAY0_DAY1.zip`.
+. Laden Sie dielink:https://console.netapp.com/automationCatalog["ONTAP - Tag 0/1  Health Checks"^] Automatisierungslösung über die Web-Benutzeroberfläche der Konsole.  Die Lösung ist verpackt als `ONTAP_DAY0_DAY1.zip` .
 . Extrahieren Sie den ZIP-Ordner und kopieren Sie die Dateien an den gewünschten Speicherort auf dem Steuerknoten in Ihrer Ansible-Umgebung.
 
 

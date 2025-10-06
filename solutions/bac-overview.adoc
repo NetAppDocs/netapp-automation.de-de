@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: solutions/bac-overview.html 
 keywords: bluexp automation catalog, automation catalog, overview, introduction 
-summary: Der BlueXP -Automatisierungskatalog ist eine Sammlung von Automatisierungslösungen, die Kunden, Partnern und Mitarbeitern von NetApp zur Verfügung stehen. Der Katalog hat mehrere Merkmale und Vorteile. 
+summary: Der Automatisierungskatalog der NetApp Console ist eine Sammlung von Automatisierungslösungen, die NetApp Kunden, -Partnern und -Mitarbeitern zur Verfügung stehen.  Der Katalog bietet mehrere Funktionen und Vorteile. 
 ---
-= Überblick über den BlueXP  Automatisierungskatalog
+= Übersicht über den Automatisierungskatalog der NetApp Console
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -14,11 +14,11 @@ summary: Der BlueXP -Automatisierungskatalog ist eine Sammlung von Automatisier
 
 
 [role="lead"]
-Der BlueXP -Automatisierungskatalog ist eine Sammlung von Automatisierungslösungen, die Kunden, Partnern und Mitarbeitern von NetApp zur Verfügung stehen. Der Katalog hat mehrere Merkmale und Vorteile.
+Der Automatisierungskatalog der NetApp Console ist eine Sammlung von Automatisierungslösungen, die NetApp Kunden, -Partnern und -Mitarbeitern zur Verfügung stehen.  Der Katalog bietet mehrere Funktionen und Vorteile.
 
-Ein Ort für Ihre Automatisierungsanforderungen:: Sie können über die BlueXP -Webbenutzeroberfläche auf das zugreifen https://console.bluexp.netapp.com/automationCatalog["BlueXP Automatisierungskatalog"^]. So können die Skripte, Playbooks und Module, die Sie benötigen, um die Automatisierung und den Betrieb Ihrer NetApp Produkte und Services zu verbessern, über eine zentrale Konsole angezeigt werden.
+Ein Ort für Ihre Automatisierungsanforderungen:: Sie können auf die https://console.netapp.com/automationCatalog["NetApp Console-Automatisierungskatalog"^] über die Web-Benutzeroberfläche der Konsole.  Dadurch wird ein zentraler Speicherort für die Skripte, Playbooks und Module bereitgestellt, die zur Verbesserung der Automatisierung und des Betriebs Ihrer NetApp -Produkte und -Services erforderlich sind.
 Lösungen werden von NetApp entwickelt und getestet:: Alle Automatisierungslösungen und Skripte wurden von NetApp erstellt und getestet. Jede Lösung richtet sich an einen bestimmten Kunden-Anwendungsfall oder eine bestimmte Anfrage. Der Schwerpunkt liegt hauptsächlich auf der Integration in NetApp File- und Datenservices.
-Dokumentation:: Jede der Automatisierungslösungen enthält eine zugehörige Dokumentation, die Ihnen den Einstieg erleichtert. Der Zugriff auf die Lösungen erfolgt über die BlueXP -Webschnittstelle, jedoch ist die gesamte Dokumentation auf dieser Website verfügbar. Die Dokumentation ist nach NetApp Produkten und Cloud-Services organisiert.
-Solide Grundlage für die Zukunft:: NetApp hilft seinen Kunden, die Automatisierung ihrer Datacenter und Cloud-Umgebungen zu verbessern und zu optimieren. Wir gehen davon aus, den Automatisierungsskatalog von BlueXP  weiter zu verbessern, um Kundenanforderungen, Technologieänderungen und kontinuierliche Produktintegration zu erfüllen.
+Dokumentation:: Zu jeder Automatisierungslösung gehört eine zugehörige Dokumentation, die Ihnen den Einstieg erleichtert.  Während auf die Lösungen über die Weboberfläche der Konsole zugegriffen werden kann, ist die gesamte Dokumentation auf dieser Site verfügbar.  Die Dokumentation ist nach den NetApp -Produkten und Cloud-Diensten organisiert.
+Solide Grundlage für die Zukunft:: NetApp unterstützt seine Kunden dabei, die Automatisierung ihrer Rechenzentren und Cloud-Umgebungen zu verbessern und zu optimieren.  Wir gehen davon aus, dass wir den Konsolenautomatisierungskatalog weiterhin erweitern werden, um Kundenanforderungen, Technologieänderungen und eine fortlaufende Produktintegration zu berücksichtigen.
 Wir möchten von Ihnen hören:: Das NetApp Customer Experience Office (CXO) Automation Team würde gerne von Ihnen hören. Wenn Sie Feedback, Probleme oder Funktionsanforderungen haben, senden Sie bitte eine E-Mail an:ng-cxo-Automation-Admins@NetApp.com[CXO-Automatisierungsteam].
 

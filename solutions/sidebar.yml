@@ -1,10 +1,10 @@
 ---
 section: solutions
-title: BlueXP Automatisierungskatalog
+title: NetApp Console-Automatisierungskatalog
 entries:
 - title: Überblick
   url: "/solutions/bac-overview.html"
-- title: Amazon FSX für NetApp ONTAP
+- title: Amazon FSx for NetApp ONTAP -Verwaltung
   entries:
   - title: Aufbruch in die Cloud
     url: "/solutions/fsxn-burst-to-cloud.html"
