@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
 permalink: solutions/bac-overview.html 
-keywords: bluexp automation catalog, automation catalog, overview, introduction 
-summary: Der Automatisierungskatalog der NetApp Console ist eine Sammlung von Automatisierungslösungen, die NetApp Kunden, -Partnern und -Mitarbeitern zur Verfügung stehen.  Der Katalog bietet mehrere Funktionen und Vorteile. 
+keywords: bluexp automation hub, automation hub, overview, introduction 
+summary: Die NetApp Console ist ein Automatisierungs-Hub, der eine Sammlung von Automatisierungslösungen für NetApp Kunden, -Partner und -Mitarbeiter bereitstellt. Der Hub bietet zahlreiche Funktionen und Vorteile. 
 ---
-= Übersicht über den Automatisierungskatalog der NetApp Console
+= Überblick über den NetApp Console Automatisierungshub
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -14,11 +14,11 @@ summary: Der Automatisierungskatalog der NetApp Console ist eine Sammlung von Au
 
 
 [role="lead"]
-Der Automatisierungskatalog der NetApp Console ist eine Sammlung von Automatisierungslösungen, die NetApp Kunden, -Partnern und -Mitarbeitern zur Verfügung stehen.  Der Katalog bietet mehrere Funktionen und Vorteile.
+Die NetApp Console ist ein Automatisierungs-Hub, der eine Sammlung von Automatisierungslösungen für NetApp Kunden, -Partner und -Mitarbeiter bereitstellt. Der Automatisierungs-Hub bietet zahlreiche Funktionen und Vorteile.
 
-Ein Ort für Ihre Automatisierungsanforderungen:: Sie können auf die https://console.netapp.com/automationCatalog["NetApp Console-Automatisierungskatalog"^] über die Web-Benutzeroberfläche der Konsole.  Dadurch wird ein zentraler Speicherort für die Skripte, Playbooks und Module bereitgestellt, die zur Verbesserung der Automatisierung und des Betriebs Ihrer NetApp -Produkte und -Services erforderlich sind.
+Ein Ort für Ihre Automatisierungsanforderungen:: Sie können auf die https://console.netapp.com/automationHub["NetApp Console Automatisierungszentrale"^] über die webbasierte Benutzeroberfläche der Konsole. Hier finden Sie alle Skripte, Playbooks und Module, die Sie benötigen, um die Automatisierung und den Betrieb Ihrer NetApp -Produkte und -Dienste zu optimieren.
 Lösungen werden von NetApp entwickelt und getestet:: Alle Automatisierungslösungen und Skripte wurden von NetApp erstellt und getestet. Jede Lösung richtet sich an einen bestimmten Kunden-Anwendungsfall oder eine bestimmte Anfrage. Der Schwerpunkt liegt hauptsächlich auf der Integration in NetApp File- und Datenservices.
 Dokumentation:: Zu jeder Automatisierungslösung gehört eine zugehörige Dokumentation, die Ihnen den Einstieg erleichtert.  Während auf die Lösungen über die Weboberfläche der Konsole zugegriffen werden kann, ist die gesamte Dokumentation auf dieser Site verfügbar.  Die Dokumentation ist nach den NetApp -Produkten und Cloud-Diensten organisiert.
-Solide Grundlage für die Zukunft:: NetApp unterstützt seine Kunden dabei, die Automatisierung ihrer Rechenzentren und Cloud-Umgebungen zu verbessern und zu optimieren.  Wir gehen davon aus, dass wir den Konsolenautomatisierungskatalog weiterhin erweitern werden, um Kundenanforderungen, Technologieänderungen und eine fortlaufende Produktintegration zu berücksichtigen.
+Solide Grundlage für die Zukunft:: NetApp hat sich zum Ziel gesetzt, seine Kunden bei der Verbesserung und Optimierung der Automatisierung ihrer Rechenzentren und Cloud-Umgebungen zu unterstützen. Wir gehen davon aus, dass wir die Automatisierungsplattform Console kontinuierlich verbessern werden, um Kundenanforderungen, technologischen Veränderungen und der fortlaufenden Produktintegration gerecht zu werden.
 Wir möchten von Ihnen hören:: Das NetApp Customer Experience Office (CXO) Automation Team würde gerne von Ihnen hören. Wenn Sie Feedback, Probleme oder Funktionsanforderungen haben, senden Sie bitte eine E-Mail an:ng-cxo-Automation-Admins@NetApp.com[CXO-Automatisierungsteam].
 

@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: solutions/ontap-day01-deploy.html 
-keywords: bluexp automation catalog, netapp automation solutions, ontap day 0/1, deploy, netapp console 
+keywords: bluexp automation hub, netapp automation solutions, ontap day 0/1, deploy, netapp console 
 summary: Nach Abschluss der Vorbereitung und Planung sind Sie bereit, mit der ONTAP Day 0/1 Lösung schnell einen ONTAP Cluster mithilfe von Ansible zu konfigurieren. 
 ---
 = Implementieren Sie den ONTAP Cluster mit der Lösung

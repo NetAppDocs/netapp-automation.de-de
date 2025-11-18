@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar 
 permalink: solutions/cvo-aws-burst-to-cloud.html 
-keywords: bluexp automation catalog, netapp automation solutions, aws, cloud volumes ontap, burst to cloud 
-summary: Dieser Artikel unterstützt die NetApp Cloud Volumes ONTAP für die AWS-Automatisierungslösung, die NetApp -Kunden im NetApp Console Automation Catalog zur Verfügung steht. 
+keywords: bluexp automation hub, netapp automation solutions, aws, cloud volumes ontap, burst to cloud 
+summary: Dieser Artikel unterstützt die NetApp Cloud Volumes ONTAP for AWS Automation Solution, die NetApp -Kunden über den NetApp Console Automation Hub zur Verfügung steht. 
 ---
 = Cloud Volumes ONTAP für AWS – Burst in die Cloud
 :hardbreaks:
@@ -14,12 +14,12 @@ summary: Dieser Artikel unterstützt die NetApp Cloud Volumes ONTAP für die AWS
 
 
 [role="lead"]
-Dieser Artikel unterstützt die NetApp Cloud Volumes ONTAP für die AWS-Automatisierungslösung, die NetApp -Kunden im NetApp Console Automation Catalog zur Verfügung steht.
+Dieser Artikel unterstützt die NetApp Cloud Volumes ONTAP for AWS Automation Solution, die NetApp -Kunden über den NetApp Console Automation Hub zur Verfügung steht.
 
 Die Automatisierungslösung Cloud Volumes ONTAP für AWS automatisiert die Container-Implementierung von Cloud Volumes ONTAP für AWS mithilfe von Terraform, sodass Sie Cloud Volumes ONTAP für AWS schnell und ohne manuelles Eingreifen implementieren können.
 
 .Bevor Sie beginnen
-* Sie müssen dielink:https://console.netapp.com/automationCatalog["Cloud Volumes ONTAP AWS – Burst in die Cloud"^] Automatisierungslösung über die Web-Benutzeroberfläche der Konsole.  Die Lösung ist verpackt als `cvo_aws_flexcache.zip` .
+* Sie müssen die link:https://console.netapp.com/automationHub["Cloud Volumes ONTAP AWS – Burst in die Cloud"^] Automatisierungslösung über die Web-Benutzeroberfläche der Konsole. Die Lösung ist verpackt als `cvo_aws_flexcache.zip`Die
 * Sie müssen eine Linux-VM im gleichen Netzwerk wie Cloud Volumes ONTAP installieren.
 * Nach der Installation der Linux-VM müssen Sie die Schritte in dieser Lösung befolgen, um die erforderlichen Abhängigkeiten zu installieren.
 

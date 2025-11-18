@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: solutions/cvo-azure-burst-to-cloud.html 
-keywords: bluexp automation catalog, netapp automation solutions, azure, cloud volumes ontap, burst to cloud. netapp, console 
+keywords: bluexp automation hub, netapp automation solutions, azure, cloud volumes ontap, burst to cloud. netapp, console 
 summary: Mit dieser Automatisierungslösung können Sie Cloud Volumes ONTAP für Azure unter Verwendung von Terraform implementieren. 
 ---
 = Cloud Volumes ONTAP für Azure – Burst in die Cloud
@@ -14,12 +14,12 @@ summary: Mit dieser Automatisierungslösung können Sie Cloud Volumes ONTAP für
 
 
 [role="lead"]
-Dieser Artikel unterstützt die NetApp Cloud Volumes ONTAP für die Azure-Automatisierungslösung, die NetApp -Kunden im NetApp Console Automation Catalog zur Verfügung steht.
+Dieser Artikel unterstützt die NetApp Cloud Volumes ONTAP for Azure Automation Solution, die NetApp -Kunden über den NetApp Console Automation Hub zur Verfügung steht.
 
 Die Automatisierungslösung Cloud Volumes ONTAP für Azure automatisiert die Container-Implementierung von Cloud Volumes ONTAP für Azure mithilfe von Terraform, sodass Sie Cloud Volumes ONTAP für Azure schnell und ohne manuelles Eingreifen implementieren können.
 
 .Bevor Sie beginnen
-* Sie müssen dielink:https://console.netapp.com/automationCatalog["Cloud Volumes ONTAP Azure – Burst in die Cloud"^] Automatisierungslösung über die Web-Benutzeroberfläche der Konsole.  Die Lösung ist verpackt als `CVO-Azure-Burst-To-Cloud.zip` .
+* Sie müssen die link:https://console.netapp.com/automationHub["Cloud Volumes ONTAP Azure – Burst in die Cloud"^] Automatisierungslösung über die Web-Benutzeroberfläche der Konsole. Die Lösung ist verpackt als `CVO-Azure-Burst-To-Cloud.zip`Die
 * Sie müssen eine Linux-VM im gleichen Netzwerk wie Cloud Volumes ONTAP installieren.
 * Nach der Installation der Linux-VM müssen Sie die Schritte in dieser Lösung befolgen, um die erforderlichen Abhängigkeiten zu installieren.
 

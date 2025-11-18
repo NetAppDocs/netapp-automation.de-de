@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar 
 permalink: solutions/cvo-gcp-burst-to-cloud.html 
-keywords: bluexp automation catalog, netapp automation solutions, gcp, cloud volumes ontap, burst to cloud, netapp, console 
-summary: Dieser Artikel unterstützt die NetApp Cloud Volumes ONTAP für die Google Cloud Automation-Lösung, die NetApp -Kunden im NetApp Console Automation Catalog zur Verfügung steht. 
+keywords: bluexp automation hub, netapp automation solutions, gcp, cloud volumes ontap, burst to cloud, netapp, console 
+summary: Dieser Artikel unterstützt die NetApp Cloud Volumes ONTAP for Google Cloud Automation Solution, die NetApp -Kunden über den NetApp Console Automation Hub zur Verfügung steht. 
 ---
 = Cloud Volumes ONTAP für Google Cloud – Burst in die Cloud
 :hardbreaks:
@@ -14,12 +14,12 @@ summary: Dieser Artikel unterstützt die NetApp Cloud Volumes ONTAP für die Goo
 
 
 [role="lead"]
-Dieser Artikel unterstützt die NetApp Cloud Volumes ONTAP für die Google Cloud Automation-Lösung, die NetApp -Kunden im NetApp Console Automation Catalog zur Verfügung steht.
+Dieser Artikel unterstützt die NetApp Cloud Volumes ONTAP für Google Cloud Automation Solution, die NetApp -Kunden über den NetApp Console Automation Hub zur Verfügung steht.
 
 Die Automatisierungslösung Cloud Volumes ONTAP für Google Cloud automatisiert die Container-Implementierung von Cloud Volumes ONTAP für Google Cloud, sodass Sie Cloud Volumes ONTAP für Google Cloud schnell und ohne manuelle Eingriffe implementieren können.
 
 .Bevor Sie beginnen
-* Sie müssen dielink:https://console.netapp.com/automationCatalog["Cloud Volumes ONTAP für Google Cloud – Burst in die Cloud"^] Automatisierungslösung über die Web-Benutzeroberfläche der Konsole.  Die Lösung ist verpackt als `cvo_gcp_flexcache.zip` .
+* Sie müssen die link:https://console.netapp.com/automationHub["Cloud Volumes ONTAP für Google Cloud – Burst in die Cloud"^] Automatisierungslösung über die Web-Benutzeroberfläche der Konsole. Die Lösung ist verpackt als `cvo_gcp_flexcache.zip`Die
 * Sie müssen eine Linux-VM im gleichen Netzwerk wie Cloud Volumes ONTAP installieren.
 * Nach der Installation der Linux-VM müssen Sie die Schritte in dieser Lösung befolgen, um die erforderlichen Abhängigkeiten zu installieren.
 
